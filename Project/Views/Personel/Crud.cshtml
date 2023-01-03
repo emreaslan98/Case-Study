@@ -1,0 +1,69 @@
+﻿@model Project.UI.Models.PersonelModel
+
+
+
+<h4>@Model.Head</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Personel.Id" />
+            <div class="form-group">
+                <label asp-for="Personel.Name" class="control-label"></label>
+                <input asp-for="Personel.Name" class="form-control" />
+                <span asp-validation-for="Personel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Personel.Surname" class="control-label"></label>
+                <input asp-for="Personel.Surname" class="form-control" />
+                <span asp-validation-for="Personel.Surname" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label>University</label>
+                <select class="form-control" asp-for="Personel.University">
+                    @foreach (var item in Model.Universities)
+                    {
+                        <option value="@item.name">@item.name</option>
+                    }
+                </select>
+            </div>
+             <div class="form-group">
+            <label asp-for="Personel.Department" class="control-label"></label>
+            <input asp-for="Personel.Department" class="form-control" />
+            <span asp-validation-for="Personel.University" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Personel.Gender" class="control-label"> Gender:  </label>
+
+                Male
+                @Html.RadioButtonFor(m => m.Personel.Gender,"Male")
+                Female
+                @Html.RadioButtonFor(m => m.Personel.Gender,"Female")
+
+                <span asp-validation-for="Personel.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Personel.Liability" class="control-label">Liability: </label>
+                Yes
+                @Html.CheckBoxFor(m => m.Personel.Liability)
+                <span asp-validation-for="Personel.Liability" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Model.Text" class="@Model.Class" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
